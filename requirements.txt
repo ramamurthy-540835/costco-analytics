@@ -1,0 +1,19 @@
+# Core
+google-cloud-bigquery>=3.14.0
+google-cloud-aiplatform>=1.38.0
+vertexai>=0.0.1
+
+# ADK
+google-adk>=1.0.0
+
+# MCP Server
+mcp>=1.0.0
+
+# API
+fastapi>=0.109.0
+uvicorn>=0.27.0
+pydantic>=2.5.0
+
+# Utils
+python-dotenv>=1.0.0
+httpx>=0.26.0

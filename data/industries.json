@@ -1,0 +1,44 @@
+[
+  {
+    "code": "CAFE",
+    "name": "Cafes & Bakeries",
+    "avg_value": 285.5,
+    "conversion_rate": 0.35
+  },
+  {
+    "code": "REST",
+    "name": "Restaurants",
+    "avg_value": 425.75,
+    "conversion_rate": 0.28
+  },
+  {
+    "code": "RETL",
+    "name": "Retailers",
+    "avg_value": 312.25,
+    "conversion_rate": 0.22
+  },
+  {
+    "code": "GROC",
+    "name": "Grocery Stores",
+    "avg_value": 567.8,
+    "conversion_rate": 0.4
+  },
+  {
+    "code": "CSTR",
+    "name": "Construction",
+    "avg_value": 892.45,
+    "conversion_rate": 0.18
+  },
+  {
+    "code": "HOTL",
+    "name": "Hotels & Lodging",
+    "avg_value": 756.3,
+    "conversion_rate": 0.25
+  },
+  {
+    "code": "OFFC",
+    "name": "Office & Corporate",
+    "avg_value": 445.6,
+    "conversion_rate": 0.3
+  }
+]

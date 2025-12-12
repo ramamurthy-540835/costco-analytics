@@ -1,0 +1,18 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        costco: {
+          red: '#E31837',
+          blue: '#003DA5',
+        }
+      }
+    },
+  },
+  plugins: [],
+}

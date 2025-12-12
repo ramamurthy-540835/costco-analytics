@@ -1,0 +1,42 @@
+[
+  {
+    "marketer_id": 1001,
+    "name": "John Smith",
+    "warehouse_id": 120
+  },
+  {
+    "marketer_id": 1002,
+    "name": "Emily Davis",
+    "warehouse_id": 120
+  },
+  {
+    "marketer_id": 1003,
+    "name": "Marcus Thompson",
+    "warehouse_id": 115
+  },
+  {
+    "marketer_id": 1004,
+    "name": "Lisa Wang",
+    "warehouse_id": 115
+  },
+  {
+    "marketer_id": 1005,
+    "name": "Carlos Rodriguez",
+    "warehouse_id": 130
+  },
+  {
+    "marketer_id": 1006,
+    "name": "Amanda Foster",
+    "warehouse_id": 130
+  },
+  {
+    "marketer_id": 1007,
+    "name": "Kevin O'Brien",
+    "warehouse_id": 140
+  },
+  {
+    "marketer_id": 1008,
+    "name": "Rachel Green",
+    "warehouse_id": 150
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "costco-analytics": {
+      "command": "python",
+      "args": ["/path/to/costco-poc/mcp/costco_mcp_server.py"],
+      "env": {
+        "GOOGLE_CLOUD_PROJECT": "your-gcp-project",
+        "GOOGLE_APPLICATION_CREDENTIALS": "/path/to/service-account.json"
+      }
+    }
+  }
+}

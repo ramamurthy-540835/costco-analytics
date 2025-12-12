@@ -1,0 +1,37 @@
+[
+  {
+    "warehouse_id": 115,
+    "name": "Business Center #115",
+    "region": "West",
+    "city": "Las Vegas",
+    "state": "NV"
+  },
+  {
+    "warehouse_id": 120,
+    "name": "Business Center #120",
+    "region": "West",
+    "city": "Los Angeles",
+    "state": "CA"
+  },
+  {
+    "warehouse_id": 130,
+    "name": "Business Center #130",
+    "region": "Northwest",
+    "city": "Seattle",
+    "state": "WA"
+  },
+  {
+    "warehouse_id": 140,
+    "name": "Business Center #140",
+    "region": "Southwest",
+    "city": "Phoenix",
+    "state": "AZ"
+  },
+  {
+    "warehouse_id": 150,
+    "name": "Business Center #150",
+    "region": "Central",
+    "city": "Denver",
+    "state": "CO"
+  }
+]
