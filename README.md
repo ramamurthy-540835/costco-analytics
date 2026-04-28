@@ -1,262 +1,126 @@
-# Costco Business Center Analytics Platform
+# Costco Analytics
 
-## AI-Powered Analytics with Talk-to-Data Capability
+## Overview
+*   An AI-powered analytics platform for Costco Business Centers.
+*   Provides real-time dashboards and a natural language "Talk-to-Data" interface.
+*   Supports descriptive, diagnostic, predictive, and prescriptive analytics types.
+*   Aims to empower business users with data insights through conversational AI.
+*   Leverages Google Cloud Platform for scalable data processing and AI capabilities.
 
-A complete POC solution demonstrating advanced analytics capabilities for Costco Business Center, featuring:
+## Business Problem
+*   Costco Business Centers need deeper, actionable insights from their operational data.
+*   Traditional reporting can be slow and requires specialized data expertise.
+*   Identifying root causes for performance drops or opportunities for growth is challenging.
+*   Forecasting future trends and generating data-driven recommendations is often complex.
+*   There's a need for an intuitive way for business users to query and understand data.
 
-- **Descriptive Analytics (What)**: Real-time dashboards and data visualization
-- **Diagnostic Analytics (Why)**: AI-powered root cause analysis
-- **Predictive Analytics (What Will Happen)**: ML-based forecasting
-- **Prescriptive Analytics (What Should I Do)**: Actionable recommendations
+## Key Capabilities
+*   **Descriptive Analytics**: Real-time dashboards displaying key performance indicators.
+*   **Diagnostic Analytics**: AI-powered root cause analysis to explain trends.
+*   **Predictive Analytics**: Machine learning models for sales and conversion forecasting.
+*   **Prescriptive Analytics**: Actionable recommendations for business optimization.
+*   **Talk-to-Data Interface**: Natural language processing to query data conversationally.
+*   **Dynamic Chart Generation**: Automatically visualizes data based on user queries.
+*   **BigQuery ML Integration**: Utilizes in-database machine learning for advanced analytics.
+*   **Scalable Architecture**: Built on Google Cloud for robust performance and growth.
 
----
+## Tech Stack
+*   **Cloud**: Google Cloud Platform (GCP)
+*   **Backend**: Python, FastAPI
+*   **Frontend**: React, Tailwind CSS, Vite
+*   **Data**: Google BigQuery, BigQuery ML
+*   **AI/ML**: Google Vertex AI (Gemini 2.0 Agent)
 
-## 🏗️ Architecture
+## Architecture Flow
+1.  User accesses the analytics platform frontend (React application).
+2.  User views interactive dashboards or enters a natural language query in the chat interface.
+3.  Frontend sends API requests (for dashboards) or user queries (for chat) to the FastAPI backend.
+4.  For chat queries, the FastAPI backend routes the request to the Vertex AI Gemini 2.0 Agent.
+5.  The Gemini Agent analyzes the natural language query and orchestrates appropriate tools (e.g., SQL Tool, Predict Tool, Chart Tool).
+6.  Tools generate and execute SQL queries against BigQuery, invoke BigQuery ML models, or prepare data for visualization.
+7.  BigQuery processes the data, executes ML models, and returns results to the tools.
+8.  The Gemini Agent synthesizes the tool outputs into a natural language response or structured data.
+9.  The FastAPI backend receives the response/data from the Gemini Agent (or directly from BigQuery for dashboards).
+10. Backend sends the processed information back to the frontend.
+11. Frontend renders dashboards, charts, or the AI-generated chat response to the user.
 
+## Repository Structure
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                         Frontend (React + Tailwind)                          │
-│  ┌─────────────────────────┐     ┌─────────────────────────────────────────┐│
-│  │   Dashboard View        │     │   Talk-to-Data Chat Interface          ││
-│  │   (Metrics & Charts)    │     │   "Why did sales drop last month?"     ││
-│  └───────────┬─────────────┘     └─────────────────┬───────────────────────┘│
-└──────────────┼─────────────────────────────────────┼────────────────────────┘
-               │                                     │
-               ▼                                     ▼
-┌──────────────────────────────────────────────────────────────────────────────┐
-│                        FastAPI Backend (Python)                               │
-│  ┌────────────────────────────────────────────────────────────────────────┐  │
-│  │                    Vertex AI Gemini 2.0 Agent                           │  │
-│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌────────────┐  │  │
-│  │  │ Natural Lang │  │ SQL Tool     │  │ Predict Tool │  │ Chart Tool │  │  │
-│  │  │ Processing   │  │ (BigQuery)   │  │ (BQML)       │  │ (Viz Gen)  │  │  │
-│  │  └──────────────┘  └──────────────┘  └──────────────┘  └────────────┘  │  │
-│  └────────────────────────────────────────────────────────────────────────┘  │
-└──────────────────────────────────────────────────────────────────────────────┘
-               │                                     │
-               ▼                                     ▼
-┌──────────────────────────────────────────────────────────────────────────────┐
-│                              BigQuery                                         │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌───────────────┐  │
-│  │  leads   │  │ members  │  │pos_sales │  │marketers │  │ BQML Models   │  │
-│  └──────────┘  └──────────┘  └──────────┘  └──────────┘  │ (Forecasting) │  │
-│                                                          └───────────────┘  │
-└──────────────────────────────────────────────────────────────────────────────┘
-```
-
----
-
-## 📁 Project Structure
-
-```
-costco-poc/
-├── backend/
-│   ├── main.py              # FastAPI application with Vertex AI integration
-│   └── requirements.txt     # Python dependencies
-├── frontend/
+costco-analytics/
+├── backend/                  # FastAPI application, Vertex AI integration
+│   ├── main.py
+│   └── requirements.txt
+├── frontend/                 # React application with Tailwind CSS
 │   ├── src/
-│   │   ├── App.jsx          # Main React application
-│   │   ├── main.jsx         # React entry point
-│   │   └── index.css        # Tailwind CSS styles
-│   ├── index.html           # HTML template
-│   ├── package.json         # Node dependencies
-│   ├── vite.config.js       # Vite configuration
-│   └── tailwind.config.js   # Tailwind configuration
-├── sql/
-│   └── 01_schema.sql        # BigQuery schema and ML models
-├── data/
-│   ├── pos_sales_sample.csv # Sample POS data
-│   └── generate_sample_data.py  # Data generator script
-├── deploy/
-│   ├── cloudbuild.yaml      # Cloud Build configuration
-│   └── Dockerfile           # Container configuration
-└── docs/
-    └── README.md            # This file
+│   ├── package.json
+│   └── tailwind.config.js
+├── data/                     # Sample data and generation scripts
+│   ├── pos_sales_sample.csv
+│   └── generate_sample_data.py
+├── sql/                      # BigQuery schema and ML model definitions
+│   └── 01_schema.sql
+├── deploy/                   # Cloud deployment configurations
+│   ├── cloudbuild.yaml
+│   └── Dockerfile
+└── README.md
 ```
 
----
-
-## 🚀 Quick Start
+## Local Setup
 
 ### Prerequisites
-
-- Google Cloud Project with billing enabled
-- gcloud CLI installed and configured
-- Node.js 18+ and npm
-- Python 3.11+
+*   Google Cloud Project with billing enabled
+*   `gcloud` CLI installed and configured
+*   Node.js 18+ and npm
+*   Python 3.11+
 
 ### Step 1: Set Up GCP Resources
-
 ```bash
-# Set your project ID
 export PROJECT_ID="your-project-id"
 export REGION="us-central1"
 
-# Enable required APIs
-gcloud services enable \
-  bigquery.googleapis.com \
-  aiplatform.googleapis.com \
-  run.googleapis.com \
-  cloudbuild.googleapis.com
-
-# Create BigQuery dataset
+gcloud services enable bigquery.googleapis.com aiplatform.googleapis.com run.googleapis.com cloudbuild.googleapis.com
 bq mk --location=US costco_analytics
 ```
 
 ### Step 2: Load Data into BigQuery
-
 ```bash
-# Run the schema creation
 bq query --use_legacy_sql=false < sql/01_schema.sql
 
-# Generate and load sample data
 cd data
 python generate_sample_data.py
 
-# Load data to BigQuery
-bq load --source_format=NEWLINE_DELIMITED_JSON \
-  costco_analytics.leads leads.json
-
-bq load --source_format=NEWLINE_DELIMITED_JSON \
-  costco_analytics.members members.json
-
-bq load --source_format=NEWLINE_DELIMITED_JSON \
-  costco_analytics.pos_sales pos_sales.json
+bq load --source_format=NEWLINE_DELIMITED_JSON costco_analytics.leads leads.json
+bq load --source_format=NEWLINE_DELIMITED_JSON costco_analytics.members members.json
+bq load --source_format=NEWLINE_DELIMITED_JSON costco_analytics.pos_sales pos_sales.json
 ```
 
 ### Step 3: Run Backend Locally
-
 ```bash
 cd backend
-
-# Create virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
+source venv/bin/activate
 pip install -r requirements.txt
 
-# Set environment variables
 export GCP_PROJECT_ID="your-project-id"
 export GCP_LOCATION="us-central1"
 
-# Run the server
 uvicorn main:app --reload --port 8080
 ```
 
 ### Step 4: Run Frontend Locally
-
 ```bash
 cd frontend
-
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
 ```
+Open `http://localhost:3000` in your browser.
 
-Open http://localhost:3000 in your browser.
-
----
-
-## 💬 Talk-to-Data Examples
-
-### What (Descriptive)
-- "What is our total revenue this year?"
-- "Show me sales by warehouse"
-- "What are the top 5 industries by transaction count?"
-
-### Why (Diagnostic)
-- "Why did Warehouse 120 underperform last quarter?"
-- "Why are Restaurant leads converting better than Retail?"
-- "Compare conversion rates between lead sources"
-
-### Predict (Predictive)
-- "Forecast sales for the next 30 days"
-- "Which leads are most likely to convert?"
-- "What will revenue look like next month?"
-
-### Recommend (Prescriptive)
-- "Which marketers should focus on which industries?"
-- "What should we do to improve conversion rates?"
-- "Recommend actions to increase Warehouse 115 performance"
-
----
-
-## 📊 Dashboard Features
-
-1. **Key Metrics Cards**
-   - Total Revenue
-   - Active Members
-   - Conversion Rate
-   - Average Transaction Value
-
-2. **Interactive Charts**
-   - Revenue by Warehouse (Bar Chart)
-   - Revenue by Industry (Pie Chart)
-   - Lead Funnel (Area Chart)
-   - Top Marketers (Leaderboard)
-
-3. **Real-time Filters**
-   - Date range selection
-   - Warehouse filter
-   - Industry filter
-
----
-
-## 🔧 BigQuery ML Models
-
-### 1. Sales Forecasting (ARIMA+)
-```sql
--- Predict next 30 days of revenue
-SELECT * FROM ML.FORECAST(
-  MODEL `costco_analytics.sales_forecast_model`,
-  STRUCT(30 AS horizon, 0.95 AS confidence_level)
-)
-```
-
-### 2. Lead Conversion Prediction
-```sql
--- Get conversion probability for active leads
-SELECT 
-  lead_id,
-  business_name,
-  predicted_is_converted_probs[OFFSET(1)].prob as conversion_probability
-FROM ML.PREDICT(
-  MODEL `costco_analytics.lead_conversion_model`,
-  (SELECT * FROM costco_analytics.leads WHERE status = 'Qualified')
-)
-ORDER BY conversion_probability DESC
-```
-
-### 3. Member Segmentation
-```sql
--- Cluster members by behavior
-SELECT 
-  centroid_id as segment,
-  COUNT(*) as member_count,
-  AVG(lifetime_value) as avg_ltv
-FROM ML.PREDICT(
-  MODEL `costco_analytics.member_segments_model`,
-  (SELECT * FROM costco_analytics.v_member_metrics)
-)
-GROUP BY centroid_id
-```
-
----
-
-## ☁️ Deploy to GCP
+## Deployment
 
 ### Deploy Backend to Cloud Run
-
 ```bash
 cd backend
-
-# Build and push container
 gcloud builds submit --tag gcr.io/$PROJECT_ID/costco-analytics-api
-
-# Deploy to Cloud Run
 gcloud run deploy costco-analytics-api \
   --image gcr.io/$PROJECT_ID/costco-analytics-api \
   --platform managed \
@@ -266,69 +130,54 @@ gcloud run deploy costco-analytics-api \
 ```
 
 ### Deploy Frontend to Firebase Hosting
-
 ```bash
 cd frontend
-
-# Build production bundle
 npm run build
-
-# Deploy to Firebase
 firebase init hosting
 firebase deploy
 ```
+## Architecture
 
----
+AI-Powered Analytics Platform for Costco Business Center.
 
-## 🔒 Security Considerations
+```mermaid
+%%{init: {'flowchart': {'nodeSpacing': 50, 'rankSpacing': 70}}}%%
+flowchart LR
+  subgraph UI_Layer ["UI Layer"]
+    A["Costco Analytics Dashboard
+(React, Tailwind CSS)"]
+  end
+  subgraph API_Layer ["API Layer"]
+    B["Backend API Services
+(FastAPI, Python, .NET, Go)"]
+  end
+  subgraph Processing_Layer ["Processing Layer"]
+    E["Data Ingestion & Processing
+(ETL, Data Prep for Analytics)"]
+  end
+  subgraph AI_Layer ["AI Layer"]
+    C["AI Analytics & Prediction Engine
+(ML for Forecasting, Root Cause Analysis)"]
+    D["Talk-to-Data AI Agent
+(Natural Language Query Processing)"]
+  end
+  subgraph Data_Storage_Layer ["Data/Storage Layer"]
+    F["Costco Business Data Lake/Warehouse
+(SQL Databases, Analytical Data Store)"]
+  end
+  A --> B
+  B --> C
+  B --> D
+  B --> F
+  C --> F
+  D --> F
+  E --> F
+```
 
-1. **Authentication**: Add Firebase Auth or Cloud Identity
-2. **API Security**: Use API Gateway with API keys
-3. **Data Access**: Implement row-level security in BigQuery
-4. **Secrets**: Use Secret Manager for API keys
+For a standalone preview, see [docs/architecture.html](docs/architecture.html).
 
----
-
-## 📈 Performance Optimization
-
-1. **BigQuery**: Use partitioned tables for large datasets
-2. **Caching**: Implement Redis for frequent queries
-3. **CDN**: Use Cloud CDN for static assets
-4. **Monitoring**: Set up Cloud Monitoring dashboards
-
----
-
-## 🎯 POC Demo Script
-
-### Demo Flow (15 minutes)
-
-1. **Dashboard Overview** (3 min)
-   - Show key metrics
-   - Highlight revenue trends
-   - Demonstrate filters
-
-2. **Talk-to-Data Demo** (8 min)
-   - Start with simple "What is our total revenue?"
-   - Progress to "Why did Warehouse 120 underperform?"
-   - Show forecasting: "Predict next month's sales"
-   - End with recommendation: "Which leads should we prioritize?"
-
-3. **Technical Deep-Dive** (4 min)
-   - Show SQL being generated
-   - Explain ML model integration
-   - Discuss scalability and security
-
----
-
-## 📞 Support
-
-For questions or issues, contact:
-- Technical Lead: [Your Name]
-- Email: [Your Email]
-- Slack: #costco-analytics-poc
-
----
-
-## 📄 License
-
-Proprietary - Mastech Digital / Costco Wholesale
+### Key Architectural Aspects:
+* Leverages AI/ML for advanced analytics, including predictive forecasting, diagnostic root cause analysis, and prescriptive recommendations.
+* Features a 'Talk-to-Data' capability, allowing users to interact with business data using natural language queries via an AI agent.
+* Provides a comprehensive analytics platform with real-time dashboards and data visualizations through a modern React frontend and FastAPI backend.
+* Utilizes a robust data pipeline to ingest, process, and store Costco Business Center data for all analytical and AI consumption.
