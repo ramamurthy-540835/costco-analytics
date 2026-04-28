@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>costco-analytics - Architecture Diagram</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .mermaid { width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+    <h1>costco-analytics Architecture Diagram</h1>
+    <div class="mermaid">
+%%{init: {'flowchart': {'nodeSpacing': 50, 'rankSpacing': 70}}}%%
+flowchart LR
+  subgraph UI_Layer ["UI Layer"]
+    A["Costco Analytics Dashboard
+(React, Tailwind CSS)"]
+  end
+  subgraph API_Layer ["API Layer"]
+    B["Backend API Services
+(FastAPI, Python, .NET, Go)"]
+  end
+  subgraph Processing_Layer ["Processing Layer"]
+    E["Data Ingestion & Processing
+(ETL, Data Prep for Analytics)"]
+  end
+  subgraph AI_Layer ["AI Layer"]
+    C["AI Analytics & Prediction Engine
+(ML for Forecasting, Root Cause Analysis)"]
+    D["Talk-to-Data AI Agent
+(Natural Language Query Processing)"]
+  end
+  subgraph Data_Storage_Layer ["Data/Storage Layer"]
+    F["Costco Business Data Lake/Warehouse
+(SQL Databases, Analytical Data Store)"]
+  end
+  A --> B
+  B --> C
+  B --> D
+  B --> F
+  C --> F
+  D --> F
+  E --> F
+    </div>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+</html>
